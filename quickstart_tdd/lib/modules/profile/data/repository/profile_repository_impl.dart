@@ -5,7 +5,7 @@ import 'package:quickstart_tdd/modules/profile/domain/errors/profile_exceptions.
 import 'package:quickstart_tdd/modules/profile/domain/errors/profile_failures.dart';
 import 'package:quickstart_tdd/modules/profile/domain/repository/profile_repository.dart';
 
-class ProfileRepositoryImpl implements ProfileRespository {
+class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileDatasource datasource;
 
   const ProfileRepositoryImpl({required this.datasource});

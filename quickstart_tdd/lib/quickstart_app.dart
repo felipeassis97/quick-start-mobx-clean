@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:quickstart_tdd/modules/profile/presentation/pages/profile_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class QuickstartApp extends StatelessWidget {
   const QuickstartApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Quickstart app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ProfilePage(title: 'Flutter Demo Home Page'),
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }

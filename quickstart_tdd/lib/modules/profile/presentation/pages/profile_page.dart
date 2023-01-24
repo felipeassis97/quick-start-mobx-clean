@@ -1,47 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quickstart_tdd/modules/profile/presentation/stores/profile_store.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class ProfilePage extends StatelessWidget {
+  final ProfileStore _store = Modular.get<ProfileStore>();
+  ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    _loadData();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Home'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      body: Observer(builder: (context) {
+        return Center(
+          child: Text(
+            _store.userData?.name ??
+                'You have pushed the button this many times:',
+          ),
+        );
+      }),
     );
   }
+
+  Future<void> _loadData() async => await _store.getUserInfo();
 }
